@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Stock Analysis Dashboard</h1>
+    </header>
+    <main>
+        <section id="single-stock">
+            <h2>Analyze a Single Stock</h2>
+            <form action="/analyze_stock" method="post">
+                <label for="ticker">Ticker Symbol:</label>
+                <input type="text" id="ticker" name="ticker" required>
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" required>
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" required>
+                <button type="submit">Analyze Stock</button>
+            </form>
+        </section>
+        
+        <section id="summary-indicators">
+            <h2>Summary Indicators for EGX30</h2>
+            <form action="/summary_indicators" method="post">
+                <label for="summary_start_date">Start Date:</label>
+                <input type="date" id="summary_start_date" name="start_date" required>
+                <label for="summary_end_date">End Date:</label>
+                <input type="date" id="summary_end_date" name="end_date" required>
+                <button type="submit">Get Summary</button>
+            </form>
+        </section>
+
+        <section id="oversold-booming">
+            <h2>Oversold to Buy or Booming</h2>
+            <form action="/oversold_booming" method="post">
+                <label for="oversold_start_date">Start Date:</label>
+                <input type="date" id="oversold_start_date" name="start_date" required>
+                <label for="oversold_end_date">End Date:</label>
+                <input type="date" id="oversold_end_date" name="end_date" required>
+                <button type="submit">Check Stocks</button>
+            </form>
+        </section>
+
+        <section id="results">
+            <h2>Results</h2>
+            <div id="result-output">
+                <!-- Results will be displayed here -->
+                {% if results %}
+                    <ul>
+                    {% for result in results %}
+                        <li>{{ result }}</li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No results to display.</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Stock Analysis Dashboard</p>
+    </footer>
+</body>
+</html>
